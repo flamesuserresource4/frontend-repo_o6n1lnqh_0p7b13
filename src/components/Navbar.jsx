@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 
 const navItems = [
-  { label: 'About', target: 'about' },
-  { label: 'Certificates', target: 'certificates' },
+  { label: 'Home', href: '#/' },
+  { label: 'About', href: '#/about' },
+  { label: 'Certificates', href: '#/certificates' },
+  { label: 'Contact', href: '#/contact' },
 ];
 
 export default function Navbar() {
@@ -14,11 +16,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleScroll = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -26,18 +23,18 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <div className="text-white font-semibold tracking-widest uppercase">MAF</div>
+        <a href="#/" className="text-white font-semibold tracking-widest uppercase">MAF</a>
         <ul className="flex items-center gap-6">
           {navItems.map((item) => (
-            <li key={item.target}>
-              <button
-                onClick={() => handleScroll(item.target)}
+            <li key={item.href}>
+              <a
+                href={item.href}
                 className="text-sm text-gray-200 hover:text-white transition-colors tracking-wide group"
               >
                 <span className="inline-block group-hover:-translate-y-0.5 transition-transform">
                   {item.label}
                 </span>
-              </button>
+              </a>
             </li>
           ))}
         </ul>
